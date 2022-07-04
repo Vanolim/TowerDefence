@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a10f4af9b254a04f8c037de209c4f24, type: 3}
+  m_Name: Level2
+  m_EditorClassIdentifier: 
+  SceneName: Level2
+  WavesEnemies:
+  - SpawnWaypointId: e2fd8caf-8a3c-4c71-be48-f8dc69ed2f2d
+    GroupsEnemies:
+    - TypeId: 8
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 5
+      WaitingBeforeSpawn: 0
+    - TypeId: 9
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 2
+      WaitingBeforeSpawn: 0
+    - TypeId: 4
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 0
+    - TypeId: 7
+      CountEnemyInGroup: 2
+      TimeBetweenSpawnEnemy: 3
+      WaitingBeforeSpawn: 5
+    TimeAppearance: 0
+  - SpawnWaypointId: Level2_b7e695d6-0aef-4865-8f9f-58b060f1a970
+    GroupsEnemies:
+    - TypeId: 1
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 2
+      WaitingBeforeSpawn: 0
+    - TypeId: 4
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 5
+      WaitingBeforeSpawn: 0
+    - TypeId: 1
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 2
+      WaitingBeforeSpawn: 0
+    - TypeId: 2
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 0
+    - TypeId: 3
+      CountEnemyInGroup: 2
+      TimeBetweenSpawnEnemy: 3
+      WaitingBeforeSpawn: 2
+    TimeAppearance: 6
+  - SpawnWaypointId: Level2_f0b8c20b-fad6-483f-971c-8bbcf96ca1d9
+    GroupsEnemies:
+    - TypeId: 2
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 6
+      WaitingBeforeSpawn: 0
+    - TypeId: 7
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 5
+      WaitingBeforeSpawn: 0
+    - TypeId: 5
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 1
+      WaitingBeforeSpawn: 0
+    - TypeId: 1
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 2
+      WaitingBeforeSpawn: 0
+    - TypeId: 2
+      CountEnemyInGroup: 0
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 0
+    - TypeId: 3
+      CountEnemyInGroup: 2
+      TimeBetweenSpawnEnemy: 3
+      WaitingBeforeSpawn: 0
+    TimeAppearance: 5
+  Towers: 010000000200000003000000
+  CountInitialCrystal: 450
+  TowerPlacePrice: 60
+  CrystalMinePrice: 45

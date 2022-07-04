@@ -1,0 +1,4 @@
+public class Golem : Enemy
+{
+        
+}

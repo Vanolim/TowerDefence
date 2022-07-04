@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a10f4af9b254a04f8c037de209c4f24, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: 
+  SceneName: Level1
+  WavesEnemies:
+  - SpawnWaypointId: Main_4b697688-3ede-4dd1-b675-ea5f95c3c48a
+    GroupsEnemies:
+    - TypeId: 0
+      CountEnemyInGroup: 5
+      TimeBetweenSpawnEnemy: 3
+      WaitingBeforeSpawn: 0
+    - TypeId: 1
+      CountEnemyInGroup: 6
+      TimeBetweenSpawnEnemy: 2
+      WaitingBeforeSpawn: 4
+    - TypeId: 6
+      CountEnemyInGroup: 3
+      TimeBetweenSpawnEnemy: 2
+      WaitingBeforeSpawn: 3
+    TimeAppearance: 5
+  - SpawnWaypointId: Main_de75501c-ef6a-44bf-9027-0d5441963f3d
+    GroupsEnemies:
+    - TypeId: 8
+      CountEnemyInGroup: 4
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 0
+    - TypeId: 2
+      CountEnemyInGroup: 1
+      TimeBetweenSpawnEnemy: 3
+      WaitingBeforeSpawn: 5
+    - TypeId: 6
+      CountEnemyInGroup: 4
+      TimeBetweenSpawnEnemy: 3
+      WaitingBeforeSpawn: 4
+    TimeAppearance: 6
+  Towers: 01000000
+  CountInitialCrystal: 400
+  TowerPlacePrice: 50
+  CrystalMinePrice: 50

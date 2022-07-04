@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c55a6a52ab6ad42b9d40ef51a7a73e, type: 3}
+  m_Name: Orc
+  m_EditorClassIdentifier: 
+  EnemyTypeId: 7
+  Health: 300
+  Speed: 6
+  ValueCrystals: 40
+  ChanceGiveCrystals: 60
+  Image: {fileID: 21300000, guid: 4d7a6e4eb731b7a4b8f79210915132df, type: 3}
+  Prefab: {fileID: 5149743043845675939, guid: c282d043ab483824dbc609990acb217d, type: 3}

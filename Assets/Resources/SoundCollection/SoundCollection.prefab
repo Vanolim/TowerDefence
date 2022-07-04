@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6518381725610986567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6518381725610986561}
+  - component: {fileID: 6518381725610986560}
+  m_Layer: 0
+  m_Name: SoundCollection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6518381725610986561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518381725610986567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6518381725610986560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518381725610986567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9e6be7e02946d0b063d2ab754461ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonSelect: {fileID: 8300000, guid: b1b337ce11e9bbf4f8c080375dc0baf3, type: 3}
+  _button: {fileID: 8300000, guid: a4ad2271e19a9af40949dfb8fe122963, type: 3}
+  _victory: {fileID: 8300000, guid: 577fe9fe159580841b81c4344465df26, type: 3}
+  _lose: {fileID: 8300000, guid: 0fb2e2b297117f849a02e34e6bf045b0, type: 3}
+  _touchPlace: {fileID: 8300000, guid: d03799f3efd1c8048be23888ee119f61, type: 3}
+  _touchCrystalMine: {fileID: 8300000, guid: 53e17aef92173694abcae417a049111f, type: 3}
+  _soundError: {fileID: 8300000, guid: 89ab94383dabeee45ab647370823d61c, type: 3}
+  _soundSpending: {fileID: 8300000, guid: 76ac31ba96c0a824786e4266af114344, type: 3}
+  _soundHealth: {fileID: 8300000, guid: cebfa04d044bdc6419d0dae6ad984495, type: 3}
+  _addWallet: {fileID: 8300000, guid: 8a0afa2f89407df4daa7cd5c476119f3, type: 3}
+  _musics:
+  - {fileID: 8300000, guid: 1ff9f9957e5ec96448aa24ec0c4ff75e, type: 3}
+  - {fileID: 8300000, guid: be3067c3e4e9cba4fb07a8f502723d91, type: 3}
+  - {fileID: 8300000, guid: 7597ad459337ed444b0134b6e6ee0e71, type: 3}
+  - {fileID: 8300000, guid: 71e0e4a8e839e5c46a2fe683034fdc33, type: 3}
+  - {fileID: 8300000, guid: 88a436bef68d78347903749d348059e2, type: 3}
+  - {fileID: 8300000, guid: 803eaf242bc8749428b688ca7b961e9f, type: 3}
+  - {fileID: 8300000, guid: e493c6f6bbc0dd141b5cc0ee78121a8f, type: 3}
