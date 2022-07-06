@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class GameStateMachine
 {
@@ -17,7 +16,8 @@ public class GameStateMachine
                 services.Single<IGameFactory>(), 
                 services.Single<ISaveLoad>(),
                 services.Single<IStaticDataService>(),
-                services.Single<IAudioPlayer>()),
+                services.Single<IAudioPlayer>(),
+                services.Single<IExitApplicationHandler>()),
 
             [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, nameLogicScenes,
                 services.Single<IGameFactory>(), 
@@ -33,6 +33,9 @@ public class GameStateMachine
             
             [typeof(ExitLevelState)] = new ExitLevelState(this, 
                 services.Single<IEndLevelHandler>(), services.Single<ISaveLoad>(), nameLogicScenes),
+            
+            [typeof(ExitApplicationState)] = new ExitApplicationState(this, 
+                services.Single<IExitApplicationHandler>())
         };
     }
      

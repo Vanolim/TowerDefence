@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class LevelSceneContextUI : MonoBehaviour, IDisposable
 {
-    [SerializeField] private HpBar _hpBar;
     [SerializeField] private BalanceView _balanceView;
     [SerializeField] private SellView _sellView;
     [SerializeField] private PlayerHealthView _playerHealthView;
@@ -11,8 +10,7 @@ public class LevelSceneContextUI : MonoBehaviour, IDisposable
     [SerializeField] private PauseView _pauseView;
     [SerializeField] private Button _pause;
     [SerializeField] private Image _joystick;
-
-    public HpBar HpBar => _hpBar;
+    
     public BalanceView BalanceView => _balanceView;
     public SellView SellView => _sellView;
     public PlayerHealthView PlayerHealthView => _playerHealthView;

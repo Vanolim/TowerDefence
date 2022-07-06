@@ -21,29 +21,33 @@ MonoBehaviour:
       TimeBetweenSpawnEnemy: 3
       WaitingBeforeSpawn: 0
     - TypeId: 1
-      CountEnemyInGroup: 6
+      CountEnemyInGroup: 10
       TimeBetweenSpawnEnemy: 2
       WaitingBeforeSpawn: 4
     - TypeId: 6
-      CountEnemyInGroup: 3
-      TimeBetweenSpawnEnemy: 2
-      WaitingBeforeSpawn: 3
+      CountEnemyInGroup: 6
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 6
+    - TypeId: 5
+      CountEnemyInGroup: 1
+      TimeBetweenSpawnEnemy: 1
+      WaitingBeforeSpawn: 2
     TimeAppearance: 5
   - SpawnWaypointId: Main_de75501c-ef6a-44bf-9027-0d5441963f3d
     GroupsEnemies:
     - TypeId: 8
-      CountEnemyInGroup: 4
+      CountEnemyInGroup: 5
       TimeBetweenSpawnEnemy: 4
       WaitingBeforeSpawn: 0
     - TypeId: 2
-      CountEnemyInGroup: 1
+      CountEnemyInGroup: 2
       TimeBetweenSpawnEnemy: 3
       WaitingBeforeSpawn: 5
     - TypeId: 6
-      CountEnemyInGroup: 4
-      TimeBetweenSpawnEnemy: 3
-      WaitingBeforeSpawn: 4
-    TimeAppearance: 6
+      CountEnemyInGroup: 8
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 6
+    TimeAppearance: 10
   Towers: 01000000
   CountInitialCrystal: 400
   TowerPlacePrice: 50

@@ -76,7 +76,10 @@ public class AudioPlayer : IAudioPlayer
         _sound.Play();
     }
 
-    public void PlayMusic() => _music.Play();
+    public void PlayMusic()
+    {
+        _music.Play();
+    }
 
     public void StopMusic() => _music.Stop();
     public void ChangeMusic()

@@ -8,10 +8,8 @@ public class InputHandler : IInputHandler
     private const string IGNORE_LAYER_RAYCAST = "Ignore Raycast";
     private const string IGNORE_LAYER_BORDER = "Border";
     private const string IGNORE_LAYER_HERO = "Hero";
-
-    public event Action<IGoodsView> OnTouchPlaceForSale;
-    public event Action<IGoodsView> OnTouchTowerPlace;
-    public event Action<IGoodsView> OnTouchRawMine;
+    
+    public event Action<ITouchable> OnTouch; 
 
     public InputHandler(IInputService inputService)
     {
@@ -28,12 +26,8 @@ public class InputHandler : IInputHandler
         {
             GameObject hitObject = hit.collider.gameObject;
             
-            if (hitObject.TryGetComponent(out TowerPlace towerPlace))
-                OnTouchTowerPlace?.Invoke(towerPlace);
-            if(hitObject.TryGetComponent(out TowerPlaceForSale placeForSale))
-                OnTouchPlaceForSale?.Invoke(placeForSale);
-            if (hitObject.TryGetComponent(out CrystalRawMine crystalRawMine))
-                OnTouchRawMine?.Invoke(crystalRawMine);
+            if(hitObject.TryGetComponent(out ITouchable touchable))
+                OnTouch?.Invoke(touchable);
         }
     }
 
@@ -45,5 +39,6 @@ public class InputHandler : IInputHandler
 
     private LayerMask GetIgnoreLayers() =>
         (1 << LayerMask.NameToLayer(IGNORE_LAYER_RAYCAST) 
-         | (1 << LayerMask.NameToLayer(IGNORE_LAYER_BORDER) | (1 << LayerMask.NameToLayer(IGNORE_LAYER_HERO))));
+            | (1 << LayerMask.NameToLayer(IGNORE_LAYER_BORDER) 
+            | (1 << LayerMask.NameToLayer(IGNORE_LAYER_HERO))));
 }

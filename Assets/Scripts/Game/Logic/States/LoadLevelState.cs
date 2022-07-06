@@ -72,6 +72,7 @@ public class LoadLevelState : IState, ICloseState
 
     private void InitGameWorld()
     {
+        TouchHandler touchHandler = new TouchHandler(_inputHandler);
         _pauseHandler.SetPause(false);
         _levelData.Load(_nameLogicScenes.LevelScene);
         Player player = new Player(_levelData, _pauseHandler, _audioPlayer);
@@ -88,7 +89,7 @@ public class LoadLevelState : IState, ICloseState
         Collections collections = new Collections(spawners, player, coreLevelLogic.UpdateGameWorld, coreLevelLogic.Level.EnemySpawnScenario);
 
         PlayerLogic playerLogic = new PlayerLogic(viewHandlers.PurchaseRadialViewHandler, coreLevelLogic.GameBoard,
-            spawners, _staticDataService, _inputHandler, _levelData, _audioPlayer);
+            spawners, _staticDataService, touchHandler, _levelData, _audioPlayer);
 
         Hero hero = InitHero();
         CameraFollow(hero.gameObject);
@@ -107,7 +108,7 @@ public class LoadLevelState : IState, ICloseState
     
     private Hero InitHero()
     {
-        Hero hero = _gameFactory.CreateHero(GameObject.FindObjectOfType<PlayerInitialPoint>().gameObject.transform.position);
+        Hero hero = _gameFactory.CreateHero(GameObject.FindObjectOfType<PlayerInitialPoint>().GetPosition());
         hero.Init(_inputService);
         return hero;
     }

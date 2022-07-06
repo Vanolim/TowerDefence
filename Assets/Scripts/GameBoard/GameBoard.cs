@@ -5,20 +5,17 @@ public class GameBoard
 {
     private SpawnWaypoint[] _spawnWaypoint;
     private TowerPlaceForSale[] _placesForSell;
-    private CrystalRawMine[] _crystalRawMines;
-    
     private List<Path> _paths;
 
     public SpawnWaypoint[] SpawnWaypoints => _spawnWaypoint;
     public TowerPlaceForSale[] PlacesForSell => _placesForSell;
-    public CrystalRawMine[] CrystalRawMines => _crystalRawMines;
 
     public GameBoard()
     {
         Init();
     }
 
-    public void Init()
+    private void Init()
     {
         FindObjectsOnScene();
         InitPaths();
@@ -28,7 +25,6 @@ public class GameBoard
     {
         _spawnWaypoint = FindObjects<SpawnWaypoint>();
         _placesForSell = FindObjects<TowerPlaceForSale>();
-        _crystalRawMines = FindObjects<CrystalRawMine>();
     }
 
     private T[] FindObjects<T>() where T : MonoBehaviour

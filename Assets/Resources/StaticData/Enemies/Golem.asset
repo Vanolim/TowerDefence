@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyTypeId: 5
   Health: 500
-  Speed: 3
+  Speed: 4
   ValueCrystals: 50
   ChanceGiveCrystals: 100
   Image: {fileID: 21300000, guid: 5428c35072086d645b791ab881838f1e, type: 3}

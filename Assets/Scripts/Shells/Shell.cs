@@ -88,13 +88,6 @@ public abstract class Shell : MonoBehaviour
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 
-    protected void Rotate(float age)
-    {
-        Vector3 d = _launchVelocity;
-        d.y -= 9.81f * age * _speed;
-        transform.localRotation = Quaternion.LookRotation(d);
-    }
-
     protected List<Enemy> FindNearbyEnemies(float searchSphereRadius)
     {
         int maxColliders = 20;

@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placeForSpawn: {fileID: 4593996620425061001}
   _particle: {fileID: 6431704926669328665}
+  _touchableObjects: 2
 --- !u!1001 &7928705619294767083
 PrefabInstance:
   m_ObjectHideFlags: 0

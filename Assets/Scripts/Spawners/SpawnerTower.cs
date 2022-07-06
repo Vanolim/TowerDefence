@@ -30,5 +30,11 @@ public class SpawnerTower
         tower.Init(_spawnerShell);
         tower.gameObject.transform.position = towerPlace.GetTransformForSpawn().position;
         OnSpawned?.Invoke(tower);
+        SetTowerPlace(towerPlace);
+    }
+
+    private void SetTowerPlace(IGoodsView towerPlace)
+    {
+        towerPlace.GetTransformObject().gameObject.GetComponent<TowerPlace>().SetTower();
     }
 }

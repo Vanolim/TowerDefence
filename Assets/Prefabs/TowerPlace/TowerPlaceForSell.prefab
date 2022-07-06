@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placeForSpawn: {fileID: 4020679549620686340}
   _particle: {fileID: 2135931414148269531}
+  _touchableObjects: 1
   _price: {fileID: 9066436552856913452}
 --- !u!1001 &3093462772824134441
 PrefabInstance:

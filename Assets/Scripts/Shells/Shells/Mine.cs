@@ -19,8 +19,7 @@ public class Mine : Shell
         {
             _age += Time.deltaTime;
             MoveAlongPath();
-            Rotate(_age);
-            
+
             if (CheckingReachedGround())
             {
                 _isReachedGround = true;

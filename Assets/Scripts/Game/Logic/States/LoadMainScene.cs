@@ -11,6 +11,7 @@ public class LoadMainScene : IState, ICloseState
     private readonly ISaveLoad _saveLoad;
     private readonly IStaticDataService _staticDataService;
     private readonly IAudioPlayer _audioPlayer;
+    private readonly IExitApplicationHandler _exitApplicationHandler;
     private readonly List<IDisposable> _disposables = new List<IDisposable>();
 
     public LoadMainScene(
@@ -21,13 +22,15 @@ public class LoadMainScene : IState, ICloseState
         IGameFactory gameFactory, 
         ISaveLoad saveLoad, 
         IStaticDataService staticDataService,
-        IAudioPlayer audioPlayer)
+        IAudioPlayer audioPlayer,
+        IExitApplicationHandler exitApplicationHandler)
     {
         _gameStateMachine = gameStateMachine;
         _gameFactory = gameFactory;
         _saveLoad = saveLoad;
         _staticDataService = staticDataService;
         _audioPlayer = audioPlayer;
+        _exitApplicationHandler = exitApplicationHandler;
         _sceneLoader = sceneLoader;
         _curtain = curtain;
         _nameLogicScenes = nameLogicScenes;
@@ -48,9 +51,7 @@ public class LoadMainScene : IState, ICloseState
 
     private void InitGameWorld()
     {
-        InitAudioPlayer();
         MainSceneContextUI levelSceneContextUI = CreateHub();
-        levelSceneContextUI.Init();
 
         LevelLoader levelLoader = new LevelLoader(
             levelSceneContextUI.LevelView,
@@ -62,8 +63,12 @@ public class LoadMainScene : IState, ICloseState
             _saveLoad,
             _staticDataService);
 
-        _disposables.Add(levelSceneContextUI);
+        ExitApplication exitApplication = new ExitApplication(levelSceneContextUI.ExitApplication, _exitApplicationHandler);
+        
         _disposables.Add(levelLoader);
+        _disposables.Add(exitApplication);
+        
+        InitAudioPlayer();
         _audioPlayer.ChangeMusic();
         _audioPlayer.PlayMusic();
     }

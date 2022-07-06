@@ -1,19 +1,11 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-public class MainSceneContextUI : MonoBehaviour, IDisposable
+public class MainSceneContextUI : MonoBehaviour
 {
-    [FormerlySerializedAs("levelScenesView")] [FormerlySerializedAs("loadLevelScenesView")] [SerializeField] private LevelView levelView;
+    [SerializeField] private LevelView _levelView;
+    [SerializeField] private Button _exitApplication;
 
-    public LevelView LevelView => levelView;
-
-    public void Init()
-    {
-        
-    }
-
-    public void Dispose()
-    {
-        //
-    }
+    public LevelView LevelView => _levelView;
+    public Button ExitApplication => _exitApplication;
 }

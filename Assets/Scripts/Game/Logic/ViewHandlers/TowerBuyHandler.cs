@@ -5,17 +5,17 @@ public class TowerBuyHandler : IDisposable
     private readonly PurchaseRadialViewHandler _purchaseRadialViewHandler;
     private readonly SpawnerTower _spawnerTower;
     private readonly IStaticDataService _staticDataService;
-    private readonly IInputHandler _inputHandler;
+    private readonly TouchHandler _touchHandler;
     private readonly IAudioPlayer _audioPlayer;
     private TowerView _towerView;
 
     public TowerBuyHandler(PurchaseRadialViewHandler purchaseRadialViewHandler, IStaticDataService staticDataService,
-        SpawnerTower spawnerTower, ILevelData levelData, IInputHandler inputHandler, IAudioPlayer audioPlayer)
+        SpawnerTower spawnerTower, ILevelData levelData, TouchHandler touchHandler, IAudioPlayer audioPlayer)
     {
         _purchaseRadialViewHandler = purchaseRadialViewHandler;
         _staticDataService = staticDataService;
         _spawnerTower = spawnerTower;
-        _inputHandler = inputHandler;
+        _touchHandler = touchHandler;
         _audioPlayer = audioPlayer;
 
         Init(staticDataService, levelData);
@@ -27,7 +27,7 @@ public class TowerBuyHandler : IDisposable
         _towerView.Init(InitTowers(levelData, staticDataService));
 
         _towerView.OnBuyButton += TryBuy;
-        _inputHandler.OnTouchTowerPlace += ActivateView;
+        _touchHandler.OnTouchTowerPlace += ActivateView;
     }
 
     private List<TowerStaticData> InitTowers(ILevelData levelData, IStaticDataService staticDataService)
@@ -44,6 +44,7 @@ public class TowerBuyHandler : IDisposable
     {
         PlaySoundTouchOnPlace();
         _purchaseRadialViewHandler.HandleInputView(tower, _towerView);
+        
     }
 
     private void TryBuy(TowerTypeId towerTypeId, bool isButtonStateViewPrice)
@@ -56,10 +57,9 @@ public class TowerBuyHandler : IDisposable
     public void Dispose()
     {
         _towerView.OnBuyButton -= TryBuy;
-        _inputHandler.OnTouchTowerPlace -= ActivateView;
+        _touchHandler.OnTouchTowerPlace -= ActivateView;
     }
     
     private void PlaySoundButton() => _audioPlayer.PlayClickButton();
-
     private void PlaySoundTouchOnPlace() => _audioPlayer.PlaySoundTouchPlace();
 }

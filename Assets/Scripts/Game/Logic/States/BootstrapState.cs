@@ -43,6 +43,7 @@ public class BootstrapState : IState
         _services.RegisterSingle<IEndLevelHandler>(new EndLevelHandler());
         _services.RegisterSingle<ISaveLoad>(new SaveLoad());
         _services.RegisterSingle<IAudioPlayer>(new AudioPlayer(_services.Single<IStaticDataService>().ForSoundCollection()));
+        _services.RegisterSingle<IExitApplicationHandler>(new ExitApplicationHandler());
     }
 
     private void RegisterStaticData()

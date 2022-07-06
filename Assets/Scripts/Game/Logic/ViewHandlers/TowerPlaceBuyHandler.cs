@@ -2,18 +2,18 @@ public class TowerPlaceBuyHandler : IDisposable
 {
     private readonly PurchaseRadialViewHandler _purchaseRadialViewHandler;
     private readonly SpawnerTowerPlace _spawnerTowerPlace;
-    private readonly IInputHandler _inputHandler;
+    private readonly TouchHandler _touchHandler;
     private readonly IAudioPlayer _audioPlayer;
 
     private TowerPlaceView _towerPlaceView;
     private int _price;
 
     public TowerPlaceBuyHandler(PurchaseRadialViewHandler purchaseRadialViewHandler, GameBoard gameBoard,
-        SpawnerTowerPlace spawnerTowerPlace, IInputHandler inputHandler, ILevelData levelData, IAudioPlayer audioPlayer)
+        SpawnerTowerPlace spawnerTowerPlace, TouchHandler touchHandler, ILevelData levelData, IAudioPlayer audioPlayer)
     {
         _purchaseRadialViewHandler = purchaseRadialViewHandler;
         _spawnerTowerPlace = spawnerTowerPlace;
-        _inputHandler = inputHandler;
+        _touchHandler = touchHandler;
         _audioPlayer = audioPlayer;
 
         Init(gameBoard, levelData);
@@ -26,7 +26,7 @@ public class TowerPlaceBuyHandler : IDisposable
         _towerPlaceView.Init(_price);
 
         _towerPlaceView.OnBuyButton += TryBuy;
-        _inputHandler.OnTouchPlaceForSale += ActivateView;
+        _touchHandler.OnTouchPlaceForSale += ActivateView;
     }
 
     private void InitPlacesForSale(TowerPlaceForSale[] towerPlaces, ILevelData levelData)
@@ -56,10 +56,9 @@ public class TowerPlaceBuyHandler : IDisposable
     public void Dispose()
     {
         _towerPlaceView.OnBuyButton -= TryBuy;
-        _inputHandler.OnTouchPlaceForSale -= ActivateView;
+        _touchHandler.OnTouchPlaceForSale -= ActivateView;
     }
 
     private void PlaySoundButton() => _audioPlayer.PlayClickButton();
-
     private void PlaySoundTouchOnPlace() => _audioPlayer.PlaySoundTouchPlace();
 }

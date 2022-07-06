@@ -17,71 +17,75 @@ MonoBehaviour:
   - SpawnWaypointId: e2fd8caf-8a3c-4c71-be48-f8dc69ed2f2d
     GroupsEnemies:
     - TypeId: 8
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 4
       TimeBetweenSpawnEnemy: 5
       WaitingBeforeSpawn: 0
     - TypeId: 9
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 10
       TimeBetweenSpawnEnemy: 2
-      WaitingBeforeSpawn: 0
-    - TypeId: 4
-      CountEnemyInGroup: 0
-      TimeBetweenSpawnEnemy: 4
-      WaitingBeforeSpawn: 0
-    - TypeId: 7
-      CountEnemyInGroup: 2
-      TimeBetweenSpawnEnemy: 3
       WaitingBeforeSpawn: 5
-    TimeAppearance: 0
+    - TypeId: 4
+      CountEnemyInGroup: 6
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 4
+    - TypeId: 7
+      CountEnemyInGroup: 6
+      TimeBetweenSpawnEnemy: 3
+      WaitingBeforeSpawn: 6
+    - TypeId: 3
+      CountEnemyInGroup: 2
+      TimeBetweenSpawnEnemy: 4
+      WaitingBeforeSpawn: 1
+    TimeAppearance: 20
   - SpawnWaypointId: Level2_b7e695d6-0aef-4865-8f9f-58b060f1a970
     GroupsEnemies:
     - TypeId: 1
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 10
       TimeBetweenSpawnEnemy: 2
       WaitingBeforeSpawn: 0
     - TypeId: 4
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 6
       TimeBetweenSpawnEnemy: 5
-      WaitingBeforeSpawn: 0
+      WaitingBeforeSpawn: 4
     - TypeId: 1
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 15
       TimeBetweenSpawnEnemy: 2
-      WaitingBeforeSpawn: 0
+      WaitingBeforeSpawn: 2
     - TypeId: 2
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 4
       TimeBetweenSpawnEnemy: 4
-      WaitingBeforeSpawn: 0
+      WaitingBeforeSpawn: 1
     - TypeId: 3
       CountEnemyInGroup: 2
       TimeBetweenSpawnEnemy: 3
-      WaitingBeforeSpawn: 2
+      WaitingBeforeSpawn: 5
     TimeAppearance: 6
   - SpawnWaypointId: Level2_f0b8c20b-fad6-483f-971c-8bbcf96ca1d9
     GroupsEnemies:
     - TypeId: 2
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 1
       TimeBetweenSpawnEnemy: 6
       WaitingBeforeSpawn: 0
     - TypeId: 7
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 5
       TimeBetweenSpawnEnemy: 5
-      WaitingBeforeSpawn: 0
+      WaitingBeforeSpawn: 15
     - TypeId: 5
       CountEnemyInGroup: 0
       TimeBetweenSpawnEnemy: 1
       WaitingBeforeSpawn: 0
     - TypeId: 1
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 15
       TimeBetweenSpawnEnemy: 2
-      WaitingBeforeSpawn: 0
+      WaitingBeforeSpawn: 4
     - TypeId: 2
-      CountEnemyInGroup: 0
+      CountEnemyInGroup: 4
       TimeBetweenSpawnEnemy: 4
-      WaitingBeforeSpawn: 0
+      WaitingBeforeSpawn: 1
     - TypeId: 3
       CountEnemyInGroup: 2
       TimeBetweenSpawnEnemy: 3
-      WaitingBeforeSpawn: 0
+      WaitingBeforeSpawn: 4
     TimeAppearance: 5
   Towers: 010000000200000003000000
   CountInitialCrystal: 450
