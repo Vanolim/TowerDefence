@@ -1,19 +1,17 @@
-using UnityEngine;
-
-public class AnimationAlongMove : MonoBehaviour
+public class AnimationAlongMove : ITickable
 {
     private HeroMove _heroMove;
     private HeroAnimator _heroAnimator;
 
     private bool _isMove;
 
-    public void Init(HeroMove heroMove, HeroAnimator heroAnimator)
+    public AnimationAlongMove(HeroMove heroMove, HeroAnimator heroAnimator)
     {
         _heroMove = heroMove;
         _heroAnimator = heroAnimator;
     }
 
-    private void Update()
+    public void Tick(float dt)
     {
         bool isMove = _heroMove.IsMove;
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8358642627208941919}
   - component: {fileID: 2711582015272857620}
   - component: {fileID: 6375594824195665436}
+  - component: {fileID: 2620114183114421792}
   m_Layer: 0
   m_Name: EndPoint
   m_TagString: Untagged
@@ -44,10 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e3323de6e04b0eb7bcc7e711271d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextWaypoint: {fileID: 0}
-  WaypointType: 1
   _particleEnd: {fileID: 7320510826779385248}
-  _audio: {fileID: 6375594824195665436}
+  _audioEnd: {fileID: 6375594824195665436}
 --- !u!82 &6375594824195665436
 AudioSource:
   m_ObjectHideFlags: 0
@@ -144,6 +143,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2620114183114421792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984029410489141550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c16f7093ac30d04483a0158ac1e4bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nextWaypoint: {fileID: 0}
+  _endWaypoint: {fileID: 2711582015272857620}
+  WaypointType: 1
 --- !u!1 &7327561659493998260
 GameObject:
   m_ObjectHideFlags: 0

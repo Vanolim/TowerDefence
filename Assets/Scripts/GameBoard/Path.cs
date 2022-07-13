@@ -4,10 +4,8 @@ public class Path
 {
     private readonly List<Waypoint> _waypoints;
     private readonly SpawnWaypoint _spawnWaypoint;
-    private EndWaypoint _endWaypoint;
 
     public SpawnWaypoint SpawnWaypoint => _spawnWaypoint;
-    public EndWaypoint EndWaypoint => _endWaypoint;
 
     public Path(SpawnWaypoint spawnWaypoint)
     {
@@ -23,10 +21,8 @@ public class Path
         {
             Waypoint lastIndex = _waypoints[_waypoints.Count - 1];
             if (lastIndex.GetTypeWaypoint() == WaypointType.End)
-            {
-                _endWaypoint = lastIndex.GetComponent<EndWaypoint>();
                 break;
-            }
+
             _waypoints.Add(lastIndex.NextWaypoint);
         }
     }

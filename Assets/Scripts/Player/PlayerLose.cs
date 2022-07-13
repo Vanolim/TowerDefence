@@ -2,11 +2,11 @@ using System;
 
 public class PlayerLose : IDisposable
 {
-    private readonly Health _playerHealth;
+    private readonly IHealth _playerHealth;
     private readonly IPauseHandler _pauseHandler;
     private readonly IAudioPlayer _audioPlayer;
     public event Action OnLose;
-    public PlayerLose(Health playerHealth, IPauseHandler pauseHandler, IAudioPlayer audioPlayer)
+    public PlayerLose(IHealth playerHealth, IPauseHandler pauseHandler, IAudioPlayer audioPlayer)
     {
         _playerHealth = playerHealth;
         _pauseHandler = pauseHandler;

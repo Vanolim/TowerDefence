@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class TowerPlace : GoodsView, ITouchable
+public class TowerPlace : GoodsView
 {
-    [SerializeField] private TouchableObjects _touchableObjects;
-
-    public TouchableObjects TouchableObjects => _touchableObjects;
-    public IGoodsView GetGoodsView() => this;
-    public void SetTower() => gameObject.layer = 2;
+    [SerializeField] private LayerMask _layerAfterSetTower;
+    public void SetTower() => gameObject.layer = _layerAfterSetTower;
 }

@@ -7,7 +7,7 @@ public class CrystalMineWorking : MonoBehaviour, IProduce, IPauseble
     [SerializeField] private float _miningTime;
     [SerializeField] private int _amountMining;
 
-    private bool _isPause;
+    private bool _isPaused;
     
     public event Action<int> OnGiveCrystals;
     public event Action<IProduce> OnDestroyedProduce;
@@ -21,10 +21,16 @@ public class CrystalMineWorking : MonoBehaviour, IProduce, IPauseble
         while (true)
         {
             yield return time;
-            if(_isPause == false)
+            if(_isPaused == false)
                 OnGiveCrystals?.Invoke(_amountMining);
         }
     }
 
-    public void SetPause(bool isPaused) => _isPause = isPaused;
+    public void SetPause(bool isPaused) => _isPaused = isPaused;
+
+    public void Destroyed()
+    {
+        OnDestroyedProduce?.Invoke(this);
+        Destroy(this);
+    }
 }

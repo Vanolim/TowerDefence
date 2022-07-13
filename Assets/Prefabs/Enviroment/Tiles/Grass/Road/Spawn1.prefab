@@ -160,9 +160,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextWaypoint: {fileID: 0}
+  _endWaypoint: {fileID: 0}
   WaypointType: 2
   _particleSpawn: {fileID: 7112771449984413019}
   _audioSource: {fileID: 3063571659762086775}
+  _spawnWaypointUniqueId: {fileID: 7784299662542697}
 --- !u!114 &7784299662542697
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -143,6 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placeForSpawn: {fileID: 2786878424851764421}
   _particle: {fileID: 327155835216500382}
+  _touchableObjects: 0
+  _layerAfterSetTower:
+    serializedVersion: 2
+    m_Bits: 4
 --- !u!1001 &3729015893816148076
 PrefabInstance:
   m_ObjectHideFlags: 0

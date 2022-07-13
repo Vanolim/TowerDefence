@@ -1,20 +1,23 @@
-using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyView : MonoBehaviour
 {
-    [SerializeField] private EnemyHealthView _enemyHealthView;
+    [SerializeField] private Slider _healthSlider;
     [SerializeField] private EnemyProduceView _enemyProduceView;
     [SerializeField] private Transform _canvas;
 
     private Camera _camera;
-
-    public EnemyHealthView EnemyHealthView => _enemyHealthView;
+    private IHealthView _healthView;
+    
     public EnemyProduceView EnemyProduceView => _enemyProduceView;
+    public IHealthView Health => _healthView;
 
-    private void Awake()
+    public void Init(float maxHealth)
     {
         _camera = Camera.main;
+        _healthView = new HealthView();
+        _healthView.Init(_healthSlider, maxHealth);
     }
 
     private void LateUpdate()

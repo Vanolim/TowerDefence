@@ -39,8 +39,7 @@ public class SpawnerEnemy : IDisposable
 
     private static void PlayEffectSpawnWaypoint(Path path)
     {
-        path.SpawnWaypoint.PlayParticle();
-        path.SpawnWaypoint.PlayAudio();
+        path.SpawnWaypoint.PlaySpawnEffect();
     }
 
     public void Dispose()

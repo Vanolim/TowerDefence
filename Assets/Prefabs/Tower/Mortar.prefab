@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3948219813620495391}
   - component: {fileID: 4193296996961546832}
   - component: {fileID: 6261999475146617644}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519da570f9016f942b0434ddd8e16108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _launchPoint: {fileID: 3893605845582604203}
+  LaunchPoint: {fileID: 3893605845582604203}
   shellTypeId: 2
 --- !u!1 &2325453665414822493
 GameObject:
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 1115460964861129776}
   - component: {fileID: 1755268926314576578}
   - component: {fileID: 9206022135803813732}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mortar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootSound: {fileID: 9206022135803813732}
+  _towerGun: {fileID: 6261999475146617644}
   _mortarView: {fileID: 6821302950458222475}
 --- !u!114 &6821302950458222475
 MonoBehaviour:
@@ -351,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3893605845582604203}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPositions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +384,7 @@ GameObject:
   - component: {fileID: 5047436752446174410}
   - component: {fileID: 8369310217625252512}
   - component: {fileID: 8805310898887414660}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MineLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}

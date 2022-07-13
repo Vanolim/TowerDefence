@@ -18,11 +18,11 @@ public class LevelSceneContextUI : MonoBehaviour, IDisposable
     public PauseView PauseView => _pauseView;
     public Button Pause => _pause;
 
-    public void Init(Wallet wallet, Health health)
+    public void Init(Wallet wallet, IHealth playerHealth, IAudioPlayer audioPlayer)
     {
         _sellView.Init();
         _balanceView.Init(wallet);
-        _playerHealthView.Init(health);
+        _playerHealthView.Init(playerHealth, audioPlayer);
         
         SetImageJoystick();
     }

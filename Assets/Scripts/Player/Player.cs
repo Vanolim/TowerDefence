@@ -1,7 +1,7 @@
 public class Player : IDisposable
 {
     public Wallet Wallet { get; }
-    public Health Health { get; }
+    public IHealth Health { get; }
     public PlayerLose PlayerLose { get; }
     public PlayerVictory PlayerVictory { get; }
     
@@ -10,7 +10,8 @@ public class Player : IDisposable
     public Player(ILevelData levelData, IPauseHandler pauseHandler, IAudioPlayer audioPlayer)
     {
         Wallet = new Wallet(levelData.CountInitialBalance, audioPlayer);
-        Health = new Health(INITIAL_HEALTH, audioPlayer);
+        Health = new Health();
+        Health.SetInitialHealth(INITIAL_HEALTH);
         PlayerLose = new PlayerLose(Health, pauseHandler, audioPlayer);
         PlayerVictory = new PlayerVictory(pauseHandler, audioPlayer);
     }

@@ -1,19 +1,17 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameBoard
 {
-    private SpawnWaypoint[] _spawnWaypoint;
+    private SpawnWaypoint[] _spawnWaypoints;
     private TowerPlaceForSale[] _placesForSell;
     private List<Path> _paths;
 
-    public SpawnWaypoint[] SpawnWaypoints => _spawnWaypoint;
+    public SpawnWaypoint[] SpawnWaypoints => _spawnWaypoints;
     public TowerPlaceForSale[] PlacesForSell => _placesForSell;
 
-    public GameBoard()
-    {
-        Init();
-    }
+    public GameBoard() => Init();
 
     private void Init()
     {
@@ -23,7 +21,7 @@ public class GameBoard
 
     private void FindObjectsOnScene()
     {
-        _spawnWaypoint = FindObjects<SpawnWaypoint>();
+        _spawnWaypoints = FindObjects<SpawnWaypoint>();
         _placesForSell = FindObjects<TowerPlaceForSale>();
     }
 
@@ -35,19 +33,11 @@ public class GameBoard
     private void InitPaths()
     {
         _paths = new List<Path>();
-        foreach (var spawnTile in _spawnWaypoint)
+        foreach (var spawnTile in _spawnWaypoints)
         {
             _paths.Add(new Path(spawnTile));
         }
     }
 
-    public Path GetPath(SpawnWaypoint spawnWaypoint)
-    {
-        foreach (var path in _paths)
-        {
-            if (path.SpawnWaypoint == spawnWaypoint)
-                return path;
-        }
-        return null;
-    }
+    public Path GetPath(SpawnWaypoint spawnWaypoint) => _paths.FirstOrDefault(path => path.SpawnWaypoint == spawnWaypoint);
 }

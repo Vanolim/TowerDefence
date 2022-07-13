@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3401830126176783790}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPositions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4806555900391958597}
   - component: {fileID: 7837887083521189727}
   - component: {fileID: 580446568766293395}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootSound: {fileID: 580446568766293395}
+  _towerGun: {fileID: 6717814686868526505}
 --- !u!65 &7837887083521189727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -250,7 +251,7 @@ GameObject:
   - component: {fileID: 4345037585564685816}
   - component: {fileID: 8239935660891053422}
   - component: {fileID: 6717814686868526505}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,5 +334,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f8e8f9a3aef3d4eabb3a20e24ce2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _launchPoint: {fileID: 3401830126176783790}
+  LaunchPoint: {fileID: 3401830126176783790}
   shellTypeId: 1

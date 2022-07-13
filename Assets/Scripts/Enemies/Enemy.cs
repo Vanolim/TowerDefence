@@ -4,36 +4,28 @@ using Random = UnityEngine.Random;
 
 [SelectionBase]
 [RequireComponent(typeof(TargetPoint))]
-[RequireComponent(typeof(EnemyAnimation))]
-public abstract class Enemy : MonoBehaviour, IProduce
+public class Enemy : MonoBehaviour, IProduce
 {
-    [SerializeField] private AudioSource _audio;
+    [SerializeField] private EnemySound _enemySound;
     [SerializeField] private EnemyView _enemyView;
+    [SerializeField] private EnemyAnimation _enemyAnimation;
+    [SerializeField] private LayerMask _defaultLayer;
     
-    private EnemyAnimation _enemyAnimation;
     private EnemyStaticData _enemyStaticData;
     private EnemyMovement _enemyMovement;
-    private EnemyHealth _enemyHealth;
+    private IHealth _health;
     private bool _isDeactivate;
-    public EnemyHealth EnemyHealth => _enemyHealth;
-    
+
     public event Action<int> OnGiveCrystals;
     public event Action<IProduce> OnDestroyedProduce;
     public event Action<Enemy> OnDestroyed;
     public event Action OnFinish;
 
-
     public void Init(EnemyPath path)
     {
-        _enemyAnimation = GetComponent<EnemyAnimation>();
-        
-        _enemyMovement = new EnemyMovement(transform, path, _enemyStaticData.Speed);
-        _enemyMovement.OnReachedEndPoint += Finish;
-
-        _enemyHealth = new EnemyHealth(_enemyStaticData.Health, _enemyAnimation);
-        _enemyHealth.OnHealthOver += Dead;
-
-        _enemyView.EnemyHealthView.Init(_enemyHealth, _enemyStaticData.Health);
+        InitMovement(path);
+        InitHealth();
+        InitView();
     }
 
     public void SetStaticData(EnemyStaticData staticData)
@@ -41,25 +33,55 @@ public abstract class Enemy : MonoBehaviour, IProduce
         _enemyStaticData = staticData;
     }
 
-    public void Tick()
+    private void InitMovement(EnemyPath path)
+    {
+        _enemyMovement = new EnemyMovement(transform, path, _enemyStaticData.Speed);
+        _enemyMovement.OnReachedEndPoint += Finish;
+    }
+
+    private void InitHealth()
+    {
+        _health = new Health();
+        _health.SetInitialHealth(_enemyStaticData.Health);
+        _health.OnEmpty += Dead;
+    }
+
+    private void InitView()
+    {
+        _enemyView.Init(_health.CurrentHealth);
+        _health.OnChanged += _enemyView.Health.UpdateView;
+    }
+
+    public void TakeDamage(float value)
+    {
+        _enemyAnimation.PlayHit();
+        _enemySound.PlayHit();
+        _health.ReceiveDamage(value);
+    }
+
+    public void Tick(float dt)
     {
         if(_isDeactivate == false)
-            _enemyMovement.Tick();
+            _enemyMovement.Tick(dt);
     }
 
     private void Dead()
     {
-        _audio.Play();
         _isDeactivate = true;
+        _enemyAnimation.PlayDead();
+        _enemySound.PlayDead();
         ChangeLayerMask();
-        OnDestroyed?.Invoke(this);
-        _enemyView.EnemyHealthView.Deactivate();
+        DeactivateHealth();
     }
 
-    private void ChangeLayerMask()
+    private void DeactivateHealth()
     {
-        gameObject.layer = 0;
+        _health.OnEmpty -= Dead;
+        _health.OnChanged -= _enemyView.Health.UpdateView;
+        _enemyView.Health.Deactivate();
     }
+
+    private void ChangeLayerMask() => gameObject.layer = _defaultLayer;
 
     private void Finish()
     {
@@ -72,16 +94,21 @@ public abstract class Enemy : MonoBehaviour, IProduce
     public void TryGiveCrystals()
     {
         if (Random.Range(0, 100) <= _enemyStaticData.ChanceGiveCrystals)
-        {
-            int countCrystal = _enemyStaticData.ValueCrystals;
-            OnGiveCrystals?.Invoke(countCrystal);
-            _enemyView.EnemyProduceView.Activate(countCrystal);
-        }
+            GiveCrystals();
+        
         OnDestroyedProduce?.Invoke(this);
+    }
+
+    private void GiveCrystals()
+    {
+        int countCrystal = _enemyStaticData.ValueCrystals;
+        OnGiveCrystals?.Invoke(countCrystal);
+        _enemyView.EnemyProduceView.Activate(countCrystal);
     }
 
     public void Destroyed()
     {
+        OnDestroyed?.Invoke(this);
         Destroy(gameObject);
     }
 }

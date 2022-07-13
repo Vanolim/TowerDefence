@@ -1259,8 +1259,6 @@ GameObject:
   - component: {fileID: 7397493563929420594}
   - component: {fileID: 7491066615763084802}
   - component: {fileID: 1380644175685714773}
-  - component: {fileID: 2847186497539661270}
-  - component: {fileID: 6619876678605936614}
   - component: {fileID: 1657352066269221127}
   - component: {fileID: 7670175507407782523}
   - component: {fileID: 5885635169767611702}
@@ -1325,32 +1323,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.87, z: 0}
---- !u!114 &2847186497539661270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7395641921852733738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4bc3ed9d4389c84baae492409ce761c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterController: {fileID: 1380644175685714773}
-  _movementSpeed: 2
---- !u!114 &6619876678605936614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7395641921852733738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f85bdb240b474c44865e07c5a80257f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1657352066269221127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,10 +1347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f12cf285088444bbe1a1d23d5816f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroMove: {fileID: 2847186497539661270}
   _heroUse: {fileID: 4052263422734812144}
   _heroAnimator: {fileID: 1657352066269221127}
-  _animationAlongMove: {fileID: 6619876678605936614}
+  _characterController: {fileID: 1380644175685714773}
 --- !u!81 &5885635169767611702
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2591,6 +2562,7 @@ GameObject:
   - component: {fileID: 4052263422734812144}
   - component: {fileID: 7376927179811949593}
   - component: {fileID: 3440628824748937174}
+  - component: {fileID: 1972214255849611039}
   m_Layer: 7
   m_Name: HeroUse
   m_TagString: Untagged
@@ -2625,9 +2597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dba18ad84947a1a37de07d8cc9ea25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _heroUseEffect: {fileID: 1972214255849611039}
   _radius: 5
-  _circle: {fileID: 4050850119126260734}
-  _ring: {fileID: 1517176497128257211}
 --- !u!135 &7376927179811949593
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2657,6 +2628,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1972214255849611039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7700135077022315163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f060f30d484738ab7edae9eff5a781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _circle: {fileID: 4050850119126260734}
+  _ring: {fileID: 1517176497128257211}
 --- !u!1001 &2343953417694550577
 PrefabInstance:
   m_ObjectHideFlags: 0

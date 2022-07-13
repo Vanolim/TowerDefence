@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimation : MonoBehaviour
 {
     private Animator _animator;
-    private const string HIT_TRIGGER = "GetHit";
-    private const string DIE_TRIGGER = "Die";
-    
+    private static readonly int GetHit = Animator.StringToHash("GetHit");
+    private static readonly int Die = Animator.StringToHash("Die");
+
 
     private void Awake()
     {
@@ -16,11 +15,11 @@ public class EnemyAnimation : MonoBehaviour
 
     public void PlayHit()
     {
-        _animator.SetTrigger(HIT_TRIGGER);
+        _animator.SetTrigger(GetHit);
     }
 
     public void PlayDead()
     {
-        _animator.SetTrigger(DIE_TRIGGER);
+        _animator.SetTrigger(Die);
     }
 }

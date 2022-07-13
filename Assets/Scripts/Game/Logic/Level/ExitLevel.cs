@@ -12,16 +12,20 @@ public class ExitLevel : IDisposable
         _endLevelHandler = endLevelHandler;
         _level = level;
         
-        _playerVictory.OnVictory += delegate { _isPlayerPasselLevel = true; };
+        _playerVictory.OnVictory += Victory;
         
-        _viewHandlers.OnExitMenu += delegate { _endLevelHandler.ExitMenu(_level, _isPlayerPasselLevel);};
-        _viewHandlers.OnReturnLevel += delegate { _endLevelHandler.ReturnLevel(_level, _isPlayerPasselLevel);};
+        _viewHandlers.OnExitMenu += Exit;
+        _viewHandlers.OnReturnLevel += ReturnLevel;
     }
 
     public void Dispose()
     {
-        _playerVictory.OnVictory -= delegate { _isPlayerPasselLevel = true; };
-        _viewHandlers.OnExitMenu -= delegate { _endLevelHandler.ExitMenu(_level, _isPlayerPasselLevel);};
-        _viewHandlers.OnReturnLevel -= delegate { _endLevelHandler.ReturnLevel(_level, _isPlayerPasselLevel);};
+        _playerVictory.OnVictory -= Victory;
+        _viewHandlers.OnExitMenu -= Exit;
+        _viewHandlers.OnReturnLevel -= ReturnLevel;
     }
+    
+    private void Victory() =>  _isPlayerPasselLevel = true;
+    private void Exit() => _endLevelHandler.ExitMenu(_level, _isPlayerPasselLevel);
+    private void ReturnLevel() => _endLevelHandler.ReturnLevel(_level, _isPlayerPasselLevel);
 }

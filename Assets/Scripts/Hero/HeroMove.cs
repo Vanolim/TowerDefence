@@ -1,43 +1,49 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class HeroMove : MonoBehaviour
+public class HeroMove : ITickable
 {
-    [SerializeField] private CharacterController _characterController;
-    [SerializeField] private float _movementSpeed;
+    private readonly CharacterController _characterController;
+    private readonly Transform _heroTransform;
+    private readonly IInputService _inputService;
+    private readonly Camera _camera;
 
-    private const float MotionError = 0.001f;
+    private const float MOVEMENT_SPEED = 2f;
+    private const float MOTION_ERROR = 0.001f;
     
-    private IInputService _inputService;
-    private Camera _camera;
-
     public bool IsMove { get; private set; }
 
-    public void Init(IInputService inputService)
+    public HeroMove(IInputService inputService, CharacterController characterController, Transform heroTransform)
     {
         _inputService = inputService;
-    }
-
-    private void Start()
-    {
+        _characterController = characterController;
+        _heroTransform = heroTransform;
         _camera = Camera.main;
     }
 
-    private void Update()
+    public void Tick(float dt)
+    {
+        Move(dt);
+    }
+
+    private void Move(float dt)
     {
         Vector3 movementVector = Vector3.zero;
         Vector2 axis = _inputService.MoveDirection;
         IsMove = false;
-        if (axis.sqrMagnitude > MotionError)
-        {
-            movementVector = _camera.transform.TransformDirection(axis);
-            IsMove = true;
-            movementVector.y = 0;
-            movementVector.Normalize();
-            transform.forward = movementVector;
-        }
+        if (axis.sqrMagnitude > MOTION_ERROR)
+            movementVector = SetMoveDirection(movementVector, axis);
 
         movementVector += Physics.gravity;
-        _characterController.Move(movementVector * _movementSpeed * Time.deltaTime);
+        _characterController.Move(movementVector * (MOVEMENT_SPEED * dt));
+    }
+
+    private Vector3 SetMoveDirection(Vector3 movementVector, Vector2 axis)
+    {
+        movementVector = _camera.transform.TransformDirection(axis);
+        IsMove = true;
+        movementVector.y = 0;
+        movementVector.Normalize();
+        _heroTransform.forward = movementVector;
+        return movementVector;
     }
 }

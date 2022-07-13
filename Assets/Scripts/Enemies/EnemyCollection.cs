@@ -3,13 +3,13 @@ using System.Collections.Generic;
 public class EnemyCollection : ITickable, IDisposable
 {
     private readonly SpawnerEnemy _spawnerEnemy;
-    private readonly Health _playerHealth;
+    private readonly IHealth _playerHealth;
     private readonly PlayerVictory _playerVictory;
     private readonly EnemySpawnScenario _enemySpawnScenario;
     private readonly List<Enemy> _enemies = new List<Enemy>();
     private bool _isEnemySpawnScenarioFinish = false;
 
-    public EnemyCollection(SpawnerEnemy spawnerEnemy, Health playerHealth, PlayerVictory playerVictory,
+    public EnemyCollection(SpawnerEnemy spawnerEnemy, IHealth playerHealth, PlayerVictory playerVictory,
         EnemySpawnScenario enemySpawnScenario)
     {
         _spawnerEnemy = spawnerEnemy;
@@ -28,11 +28,11 @@ public class EnemyCollection : ITickable, IDisposable
         enemy.OnFinish += RemoveHealthPlayer;
     }
 
-    public void Tick()
+    public void Tick(float dt)
     {
-        for (int i = 0; i < _enemies.Count; i++)
+        for (var i = 0; i < _enemies.Count; i++)
         {
-            _enemies[i].Tick();
+            _enemies[i].Tick(dt);
         }
     }
     
@@ -42,8 +42,8 @@ public class EnemyCollection : ITickable, IDisposable
         enemy.OnFinish -= RemoveHealthPlayer;
         RemoveEnemy(enemy);
     }
-    
-    private void RemoveHealthPlayer() => _playerHealth.RemoveHealth();
+
+    private void RemoveHealthPlayer() => _playerHealth.ReceiveDamage(1);
     private void SetIsEnemySpawnScenarioFinish() => _isEnemySpawnScenarioFinish = true;
 
     private void RemoveEnemy(Enemy enemy)

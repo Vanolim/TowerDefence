@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class EndWaypoint : Waypoint
+public class EndWaypoint : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleEnd;
-    [SerializeField] private AudioSource _audio;
+    [SerializeField] private AudioSource _audioEnd;
 
-    public void PlayParticle() => _particleEnd.Play();
-
-    public void PlaySound() => _audio.Play();
+    public void PlayEndEffect()
+    {
+        _particleEnd.Play();
+        _audioEnd.Play();
+    }
 }

@@ -2,16 +2,26 @@ public class Cannon : Tower
 {
     protected override void UpdateState()
     {
-        if (TryTrackTarget())
+        if (IsTargetSet)
         {
-            RotateBody();
-            RotateBarrel();
-            if(IsRecharged())
-                Shoot();
+            if (IsTargetActive())
+            {
+                RotateBodyOnTarget();
+                RotateBarrelOnTarget();
+                if(IsRecharged())
+                    Shoot();
+            }
         }
         else
         {
-            RotateBodyRandomly();
-        }
+            if (TryFindNewTarget() == false)
+            {
+                RotateBodyAroundRandomly();
+            }
+            else
+            {
+                StopBodyRotateRandomly();
+            }
+        };
     }
 }

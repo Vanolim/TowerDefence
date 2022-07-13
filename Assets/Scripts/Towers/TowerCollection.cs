@@ -16,11 +16,11 @@ public class TowerCollection : ITickable, IDisposable
         _towers.Add(tower);
     }
 
-    public void Tick()
+    public void Tick(float dt)
     {
         foreach (var tower in _towers)
         {
-            tower.GameUpdate();
+            tower.Tick(dt);
         }
     }
 

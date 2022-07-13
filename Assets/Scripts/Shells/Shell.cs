@@ -1,115 +1,66 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public abstract class Shell : MonoBehaviour
 {
-    private float _damage;
-    private float _speed;
+    private ShellStaticData _staticData;
 
-    private SpawnerShell _spawnerShell;
-    private TargetPoint _targetPoint;
-    private Vector3 _targetPosition;
-    private Vector3 _launchPoint;
-    private Vector3 _launchVelocity;
-    private int _layerMask;
+    protected int EnemyLayerMask;
+    protected TargetPoint TargetPoint;
+    protected Vector3 LaunchVelocity;
 
-    private const float HitRegistrationError = 0.2f;
-    private const float EarthY = 0.12f;
-    private const string LayerName = "Enemy";
-    protected Vector3 LaunchPoint => _launchPoint;
-    protected Vector3 LaunchVelocity => _launchVelocity;
+    protected const float HIT_REGISTRATION_ERROR = 1f;
+    private const float GROUND_HEIGHT = 0.12f;
+    private const string TARGET_LAYER_NAME = "Enemy";
 
-    private void Awake()
+    public event Action<Shell> OnDestroyed;
+
+    public abstract void Tick(float dt);
+    protected abstract void Init();
+    
+    public void Init(TargetPoint target)
     {
-        _layerMask = 1 << LayerMask.NameToLayer(LayerName);
+        TargetPoint = target;
+        Init();
     }
     
-    public void Init(TargetPoint targetPoint, SpawnerShell spawnerShell)
+    public void Init(Vector3 launchVelocity)
     {
-        _targetPoint = targetPoint;
-        _targetPosition = targetPoint.Position;
-        _spawnerShell = spawnerShell;
-        TurnToTarget();
+        LaunchVelocity = launchVelocity;
+        Init();
     }
 
-    public void Init(Vector3 launchVelocity, SpawnerShell spawnerShell)
+    public void SetStaticData(ShellStaticData staticData)
     {
-        _launchPoint = transform.position;
-        _launchVelocity = launchVelocity;
-        _spawnerShell = spawnerShell;
+        IniLayerMask();
+        _staticData = staticData;
     }
 
-    public void Init(ShellStaticData staticData)
+    private void IniLayerMask()
     {
-        _damage = staticData.Damage;
-        _speed = staticData.Speed;
+        EnemyLayerMask = 1 << LayerMask.NameToLayer(TARGET_LAYER_NAME);
     }
-
-    private void TurnToTarget()
-    {
-        transform.LookAt(_targetPosition);
-    }
-
-    public abstract bool GameUpdate();
 
     protected void Recycle()
     {
-        _spawnerShell.Reclaim(this);
+        OnDestroyed?.Invoke(this);
     }
-
-    protected bool IsEnemyPosition(Vector3 shellPosition)
+    
+    protected void TurnToTarget()
     {
-        if (Vector3.Distance(shellPosition, _targetPosition) <= HitRegistrationError)
-            return true;
-        return false;
-    }
-
-    protected void ToDamage()
-    {
-        ToDamage(_targetPoint.Enemy);
+        transform.LookAt(TargetPoint.Position);
     }
 
     protected void ToDamage(Enemy enemy)
     {
-        enemy.EnemyHealth.RemoveHealth(_damage);
+        enemy.TakeDamage(_staticData.Damage);
     }
 
-    protected void ToDamage(List<Enemy> enemies)
+    protected void MoveForward(float dt)
     {
-        foreach (var enemy in enemies)
-        {
-            if(enemy != null)
-                enemy.EnemyHealth.RemoveHealth(_damage);
-        }
+        transform.Translate(Vector3.forward * (_staticData.Speed * dt));
     }
 
-    protected void MoveForward()
-    {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-    }
-
-    protected List<Enemy> FindNearbyEnemies(float searchSphereRadius)
-    {
-        int maxColliders = 20;
-        Collider[] targets = new Collider[maxColliders];
-        
-        Physics.OverlapSphereNonAlloc(transform.position, searchSphereRadius, targets, _layerMask);
-        List<Enemy> enemies = new List<Enemy>();
-
-        if (targets.Length != 0)
-        {
-            for (int i = 0; i < targets.Length; i++)
-            {
-                if (targets[i] != null)
-                {
-                    Enemy enemy = targets[i].gameObject.GetComponent<Enemy>();
-                    enemies.Add(enemy);
-                }
-            }
-        }
-
-        return enemies;
-    }
-
-    protected bool CheckingReachedGround() => transform.position.y <= EarthY;
+    protected bool CheckingReachedGround() => transform.position.y <= GROUND_HEIGHT;
+    protected void Destroyed() => Destroy(gameObject);
 }

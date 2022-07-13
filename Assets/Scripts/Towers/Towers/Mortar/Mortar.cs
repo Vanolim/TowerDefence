@@ -8,28 +8,38 @@ public class Mortar : Tower
     
     protected override void UpdateState()
     {
-        if(TryTrackTarget())
+        if (IsTargetSet)
         {
-            RotateBody();
-            if (IsRecharged())
+            if (IsTargetActive())
             {
-                if (IsShoots == false)
+                RotateBodyOnTarget();
+                if (IsRecharged())
                 {
-                    _mortarView.PlayAnimationShoot();
-                    IsShoots = true;
+                    if (IsShoots == false)
+                    {
+                        _mortarView.PlayAnimationShoot();
+                        IsShoots = true;
+                    }
                 }
             }
         }
         else
         {
-            RotateBodyRandomly();
-        }
+            if (TryFindNewTarget() == false)
+            {
+                RotateBodyAroundRandomly();
+            }
+            else
+            {
+                StopBodyRotateRandomly();
+            }
+        };
     }
 
     //the method is called on the Shoot(Mortar) animation event
     public void ThrowMine()
     {
-        ShootParabolicTrajectory();
+        Shoot();
         IsShoots = false;
     }
 }

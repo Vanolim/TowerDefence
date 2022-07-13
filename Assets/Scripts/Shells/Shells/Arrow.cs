@@ -5,22 +5,27 @@ public class Arrow : Shell
     [SerializeField, Range(0.5f, 5f)] private float _lifetime;
     private float _lifeCounter = 0f;
 
-    public override bool GameUpdate()
+    protected override void Init()
     {
-        _lifeCounter += Time.deltaTime;
+        
+    }
+
+    public override void Tick(float dt)
+    {
+        _lifeCounter += dt;
         if (_lifeCounter >= _lifetime)
         {
             Recycle();
-            return false;
+            Destroyed();
+            return;
         }
 
-        MoveForward();
+        MoveForward(dt);
         if (CheckingReachedGround())
         {
             Recycle();
-            return false;
+            Destroyed();
         }
-        return true;
     }
 
     private void OnTriggerEnter(Collider collision)

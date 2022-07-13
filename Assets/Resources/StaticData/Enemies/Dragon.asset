@@ -18,4 +18,4 @@ MonoBehaviour:
   ValueCrystals: 40
   ChanceGiveCrystals: 50
   Image: {fileID: 21300000, guid: 13b7de06b5734f54cb1af8bd0911457e, type: 3}
-  Prefab: {fileID: 968662476661088880, guid: d5a2c78723409a647af519d34980ed50, type: 3}
+  Prefab: {fileID: 1325385029050892603, guid: d5a2c78723409a647af519d34980ed50, type: 3}

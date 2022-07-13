@@ -1,30 +1,38 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerHealthView : MonoBehaviour, IDisposable
 {
     [SerializeField] private List<HeartView> _hearts;
+    
     private int _initialHealth;
-    private Health _health;
+    private IHealth _playerHealth;
+    private IAudioPlayer _audioPlayer;
 
     private const int MAX_COUNT_HEALTH = 3;
 
-    public void Init(Health health)
+    public void Init(IHealth playerHealth, IAudioPlayer audioPlayer)
     {
-        if (health.CurrentCount > MAX_COUNT_HEALTH)
+        _audioPlayer = audioPlayer;
+        
+        if (playerHealth.CurrentHealth > MAX_COUNT_HEALTH)
         {
-            Debug.Log("начальное здоровье игрока больше допустимого!");
+            Debug.Log("Начальное здоровье игрока больше допустимого!");
         }
         else
         {
-            _health = health;
-            _initialHealth = health.CurrentCount;
-            health.OnChanged += UpdateView;
-            health.OnEmpty += Dispose;
+            _playerHealth = playerHealth;
+            _initialHealth = Convert.ToInt32(playerHealth.CurrentHealth);
+            
+            playerHealth.OnChanged += RemoveHeart;
+            playerHealth.OnEmpty += Dispose;
+            
             ActivateView();
         }
     }
+    
 
     private void ActivateView()
     {
@@ -34,43 +42,20 @@ public class PlayerHealthView : MonoBehaviour, IDisposable
         }
     }
 
-    private void UpdateView(int valueHealth)
+    private void RemoveHeart(float value)
     {
-        if (valueHealth > _initialHealth)
-            AddHeart();
-        else
-            RemoveHeart();
-    }
-
-    private void AddHeart()
-    {
-        foreach (var item in _hearts)
+        foreach (var item in _hearts.Where(item => item.IsActive))
         {
-            if (item.IsActive == false)
-            {
-                item.Activate();
-                _initialHealth++;
-                return;
-            }
-        }
-    }
-
-    private void RemoveHeart()
-    {
-        foreach (var item in _hearts)
-        {
-            if (item.IsActive)
-            {
-                item.Deactivate();
-                _initialHealth--;
-                return;
-            }
+            item.Deactivate();
+            _initialHealth--;
+            _audioPlayer.PlaySoundHealth();
+            return;
         }
     }
 
     public void Dispose()
     {
-        _health.OnChanged -= UpdateView;
-        _health.OnEmpty -= Dispose;
+        _playerHealth.OnChanged -= RemoveHeart;
+        _playerHealth.OnEmpty -= Dispose;
     }
 }

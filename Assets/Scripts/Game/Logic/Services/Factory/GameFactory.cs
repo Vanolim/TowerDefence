@@ -47,7 +47,7 @@ public class GameFactory : IGameFactory
 
     private void InitShell(Shell shell, ShellStaticData shellData)
     {
-        shell.Init(shellData);
+        shell.SetStaticData(shellData);
     }
 
     public Tower CreateTower(TowerTypeId towerTypeId, Transform container)
@@ -60,7 +60,7 @@ public class GameFactory : IGameFactory
 
     private void InitTower(Tower tower, TowerStaticData towerData)
     {
-        tower.Init(towerData);
+        tower.SetStaticData(towerData);
     }
 
     public CrystalMineWorking CreateMine(Transform lasMine, Transform container)

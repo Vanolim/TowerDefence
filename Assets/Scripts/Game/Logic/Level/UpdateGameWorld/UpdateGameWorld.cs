@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UpdateGameWorld : MonoBehaviour, IPauseble
 {
-    private List<ITickable> _tickables = new List<ITickable>();
+    private readonly List<ITickable> _tickables = new List<ITickable>();
     private bool _isPaused = false;
 
     public void AddTickableItem(ITickable tickable) => _tickables.Add(tickable);
@@ -14,7 +14,7 @@ public class UpdateGameWorld : MonoBehaviour, IPauseble
         {
             foreach (var item in _tickables)
             {
-                item.Tick();
+                item.Tick(Time.deltaTime);
             }
         }
     }

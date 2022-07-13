@@ -1,4 +1,4 @@
 public interface ITickable
 {
-    public void Tick();
+    public void Tick(float dt);
 }

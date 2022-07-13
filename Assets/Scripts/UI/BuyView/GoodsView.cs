@@ -1,10 +1,14 @@
 using System;
 using UnityEngine;
 
-public abstract class GoodsView : MonoBehaviour, IGoodsView
+public abstract class GoodsView : MonoBehaviour, IGoodsView, ITouchable
 {
     [SerializeField] private Transform _placeForSpawn;
-    [SerializeField] private GoodsZoneUseParticle _particle;
+    [SerializeField] private GoodsViewEffect _particle;
+    [SerializeField] private TouchableObjects _touchableObjects;
+    
+    public TouchableObjects TouchableObjects => _touchableObjects;
+    public IGoodsView GetGoodsView() => this;
 
     public event Action OnNotActive;
     
@@ -25,7 +29,7 @@ public abstract class GoodsView : MonoBehaviour, IGoodsView
         _isActive = true;
         if(_isFree == false)
              return;
-        _particle.ParticleSystem.Play();
+        _particle.Play();
     }
 
     public void Deactivate()
@@ -34,6 +38,6 @@ public abstract class GoodsView : MonoBehaviour, IGoodsView
         _isActive = false;
         if(_isFree == false)
             return;
-        _particle.ParticleSystem.Stop();
+        _particle.Stop();
     }
 }

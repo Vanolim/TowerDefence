@@ -14,24 +14,25 @@ public class ShellCollection : ITickable, IDisposable
     private void Add(Shell shell)
     {
         _shells.Add(shell);
+        shell.OnDestroyed += RemoveShell;
     }
 
-    public void Tick()
+    public void Tick(float dt)
     {
-        for (int i = 0; i < _shells.Count; i++)
+        for (var i = 0; i < _shells.Count; i++)
         {
-            if (_shells[i].GameUpdate() == false)
-            {
-                int lastIndex = _shells.Count - 1;
-                _shells[i] = _shells[lastIndex];
-                _shells.RemoveAt(lastIndex);
-                i --;
-            }
+            _shells[i].Tick(dt);
         }
     }
 
     public void Dispose()
     {
         _spawnerShell.OnSpawned -= Add;
+    }
+
+    private void RemoveShell(Shell shell)
+    {
+        shell.OnDestroyed -= RemoveShell;
+        _shells.Remove(shell);
     }
 }

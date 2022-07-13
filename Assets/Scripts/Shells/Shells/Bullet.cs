@@ -1,15 +1,29 @@
+using UnityEngine;
+
 public class Bullet : Shell
 {
-    public override bool GameUpdate()
+    protected override void Init()
     {
-        if (IsEnemyPosition(transform.position))
+        TurnToTarget();
+    }
+
+    public override void Tick(float dt)
+    {
+        if (IsEnemyPosition())
         {
-            ToDamage();
+            ToDamage(TargetPoint.Enemy);
             Recycle();
-            return false;
+            Destroyed();
+            return;
         }
 
-        MoveForward();
-        return true;
+        MoveForward(dt);
+    }
+
+    private bool IsEnemyPosition()
+    {
+        if (Vector3.Distance(transform.position, TargetPoint.Position) <= HIT_REGISTRATION_ERROR)
+            return true;
+        return false;
     }
 }

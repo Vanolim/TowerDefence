@@ -1,8 +1,4 @@
-using UnityEngine;
-
-public class CrystalRawMine : GoodsView, ITouchable
+public class CrystalRawMine : GoodsView
 {
-    [SerializeField] private TouchableObjects _touchableObjects;
-    public TouchableObjects TouchableObjects => _touchableObjects;
-    public IGoodsView GetGoodsView() => this;
+
 }

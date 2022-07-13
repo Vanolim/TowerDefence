@@ -78,7 +78,7 @@ public class LoadLevelState : IState, ICloseState
         Player player = new Player(_levelData, _pauseHandler, _audioPlayer);
 
         LevelSceneContextUI levelSceneContextUI = CreateHub();
-        levelSceneContextUI.Init(player.Wallet, player.Health);
+        levelSceneContextUI.Init(player.Wallet, player.Health, _audioPlayer);
 
         ViewHandlers viewHandlers = new ViewHandlers(levelSceneContextUI, player, _pauseHandler, _audioPlayer);
 
@@ -92,6 +92,7 @@ public class LoadLevelState : IState, ICloseState
             spawners, _staticDataService, touchHandler, _levelData, _audioPlayer);
 
         Hero hero = InitHero();
+        coreLevelLogic.UpdateGameWorld.AddTickableItem(hero);
         CameraFollow(hero.gameObject);
 
         _pauseHandler.Register(coreLevelLogic.UpdateGameWorld);
@@ -118,7 +119,7 @@ public class LoadLevelState : IState, ICloseState
     private void CameraFollow(GameObject hero)
     {
         if (Camera.main != null) 
-            Camera.main.GetComponent<CameraFollow>().SetFollowObject(hero);
+            Camera.main.GetComponent<FollowingCamera>().SetFollowObject(hero);
     }
 
     public void CloseState()

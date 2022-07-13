@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4883224345971030302}
   - component: {fileID: 7214563295262760858}
   - component: {fileID: 8400010270219763095}
+  - component: {fileID: 4934865727321989428}
   m_Layer: 9
   m_Name: Mine
   m_TagString: Untagged
@@ -99,9 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _searchSphereRadius: 1.5
   _meshRenderer: {fileID: 6413453341325825095}
-  _core: {fileID: 6171747972164353049}
-  _smoke: {fileID: 6171747972164353051}
-  _sound: {fileID: 8400010270219763095}
+  _mineEffects: {fileID: 4934865727321989428}
 --- !u!135 &7214563295262760858
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -211,6 +210,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4934865727321989428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732196787116839293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129f492fdb884d66807aa9864003849c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _core: {fileID: 6171747972164353049}
+  _smoke: {fileID: 6171747972164353051}
+  _sound: {fileID: 8400010270219763095}
 --- !u!1001 &6171747972183352283
 PrefabInstance:
   m_ObjectHideFlags: 0

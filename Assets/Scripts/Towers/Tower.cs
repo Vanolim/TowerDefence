@@ -1,96 +1,98 @@
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [SelectionBase]
 public abstract class Tower : MonoBehaviour
 {
     [SerializeField] private AudioSource _shootSound;
-    
-    private float _targetingRange;
-    private float _rechargeTime;
-    
-    private TowerGun _towerGun;
+    [SerializeField] private TowerGun _towerGun;
+
     private TargetPoint _target;
-    private Vector3 _targetPosition;
-    
+    private TowerStaticData _staticData;
+
+    protected bool IsTargetSet => _target != null;
+
     private float _distanceToTarget;
     private float _shootTimer;
     private float _randomAngleValue;
     private bool _isWorkGetRandomAngleValue = false;
-    
     private IEnumerator _workGetRandomAngleValue;
-    
-    private const int ENEMY_LAYER_MASK = 1 << 8;
-    private const int TurningSpeed = 500;
+    private float _dt;
+    private int _targetLayer;
 
-    protected TargetPoint Target => _target;
 
     public void Init(SpawnerShell spawnerShell)
     {
-        _towerGun = transform.GetComponentInChildren<TowerGun>();
-        _towerGun.Init(spawnerShell, _targetingRange);
+        _towerGun.Init(spawnerShell, _staticData.TargetingRange);
         _workGetRandomAngleValue = GetRandomAngleValue();
-    }
-
-    public void Init(TowerStaticData towerStaticData)
-    {
-        _targetingRange = towerStaticData.TargetingRange;
-        _rechargeTime = towerStaticData.RechargeTime;
+        _targetLayer = 1 << 8;
     }
     
-    public void GameUpdate()
+
+    public void SetStaticData(TowerStaticData towerStaticData)
     {
+        _staticData = towerStaticData;
+    }
+
+    public void Tick(float dt)
+    {
+        _dt = dt;
         UpdateState();
     }
 
     protected abstract void UpdateState();
 
-    protected bool TryTrackTarget()
+    protected bool IsTargetActive()
     {
-        if (_target != null && _target.gameObject.layer != ENEMY_LAYER_MASK)
-            _target = null;
-        
-        if (_target == null)
-        {
-            if (TryFindTarget() == false)
-                return false;
-        }
-        Vector3 towerPosition = transform.position;
-        _targetPosition = _target.Position;
-        _distanceToTarget = Vector3.Distance(towerPosition, _targetPosition);
-        if (_distanceToTarget > _targetingRange + _target.ColliderSize)
+        if (CheckTargetChangedLayer())
         {
             _target = null;
             return false;
         }
-        StopCoroutine(_workGetRandomAngleValue);
-        _isWorkGetRandomAngleValue = false;
+
+        if (IsTargetInRange() == false)
+        {
+            _target = null;
+            return false;
+        }
+
         return true;
     }
 
-    private bool TryFindTarget()
+    private bool CheckTargetChangedLayer() => 
+        (1 << _target.gameObject.layer) != _targetLayer;
+
+    private bool IsTargetInRange()
     {
-        float targetingRange = _targetingRange / 4;
-        for (int i = 0; i < 4; i++)
+        _distanceToTarget = Vector3.Distance(transform.position, _target.Position);
+        return !(_distanceToTarget > _staticData.TargetingRange + _target.ColliderSize);
+    }
+
+    protected bool TryFindNewTarget()
+    {
+        int numberSearchRangePositions = 4;
+        float targetingRange = _staticData.TargetingRange / numberSearchRangePositions;
+        for (int i = 0; i < numberSearchRangePositions; i++)
         {
-            if (TruFindEnemySphere(targetingRange))
+            if (TryFindTargetSearchRadius(targetingRange))
                 return true;
-            targetingRange += _targetingRange / 4;
+            
+            targetingRange += _staticData.TargetingRange / numberSearchRangePositions;
         }
 
         return false;
     }
 
-    private bool TruFindEnemySphere(float targetingRange)
+    private bool TryFindTargetSearchRadius(float searchRadius)
     {
         int maxCountEnemies = 1;
         Collider[] enemies = new Collider[maxCountEnemies];
-        Physics.OverlapSphereNonAlloc(transform.position, targetingRange, enemies, ENEMY_LAYER_MASK);
-       
-        if (enemies[0] != null && _target == null)
-        {
+        Physics.OverlapSphereNonAlloc(transform.position, searchRadius, enemies, _targetLayer);
+        
+
+        if (enemies[0] != null) 
             _target = enemies[0].GetComponent<TargetPoint>();
-        }
 
         return _target != null;
     }
@@ -102,74 +104,73 @@ public abstract class Tower : MonoBehaviour
         _shootSound.Play();
     }
 
-    protected void ShootParabolicTrajectory()
-    {
-        _towerGun.ShootParabolicTrajectory(_targetPosition);
-        _shootTimer = 0;
-        _shootSound.Play();
-    }
-
     protected bool IsRecharged()
     {
-        _shootTimer += Time.deltaTime;
-        if (_shootTimer >= _rechargeTime)
-        {
-            return true;
-        }
-
-        return false;
+        _shootTimer += _dt;
+        return _shootTimer >= _staticData.RechargeTime;
     }
 
-    protected void RotateBody()
+    protected void RotateBodyOnTarget()
     {
         Vector3 targetDirection = _target.transform.position - transform.position;
         targetDirection.y = 0.0f;
         TurnBodyAround(Quaternion.LookRotation(targetDirection));
     }
 
-    protected void RotateBodyRandomly()
+    protected void StopBodyRotateRandomly()
+    {
+        StopCoroutine(_workGetRandomAngleValue);
+        _isWorkGetRandomAngleValue = false;
+    }
+
+    protected void RotateBodyAroundRandomly()
     {
         if (_isWorkGetRandomAngleValue == false)
         {
             StartCoroutine(_workGetRandomAngleValue);
             _isWorkGetRandomAngleValue = true;
         }
+
+        float slowlyDown = 0.1f;
         Vector3 transformEulerAngles = transform.eulerAngles;
         transformEulerAngles.y = _randomAngleValue;
-        TurnBodyAround(Quaternion.Euler(transformEulerAngles), 0.1f);
+        TurnBodyAround(Quaternion.Euler(transformEulerAngles), slowlyDown);
     }
 
     private void TurnBodyAround(Quaternion around, float slowlyDown = 1f)
     {
+        int urningSpeed = 500;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, around, 
-            Time.deltaTime * TurningSpeed * slowlyDown);
+            _dt * urningSpeed * slowlyDown);
     }
 
-    protected void RotateBarrel()
+    protected void RotateBarrelOnTarget()
     {
         _towerGun.TurnToTarget(_target.Position, _distanceToTarget);
     }
-    
+
+    private IEnumerator GetRandomAngleValue()
+    {
+        float minSleepTime = 2f;
+        float maxSleepTime = 5f;
+        WaitForSeconds sleep = new WaitForSeconds(Random.Range(minSleepTime, maxSleepTime));
+        while (true)
+        {
+            _randomAngleValue = Random.Range(0, 360);
+            yield return sleep;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Vector3 position = transform.position;
         position.y += 0.1f;
-        Gizmos.DrawWireSphere(position, _targetingRange);
+        Gizmos.DrawWireSphere(position, _staticData.TargetingRange);
         if (_target != null)
         {
             Gizmos.color = Color.grey;
             Gizmos.DrawLine(transform.position, _target.Position);
-        }
-    }
-    
-    private IEnumerator GetRandomAngleValue()
-    {
-        WaitForSeconds sleep = new WaitForSeconds(Random.Range(2f, 5f));
-        while (true)
-        {
-            _randomAngleValue = Random.Range(0, 360);
-            yield return sleep;
         }
     }
 }

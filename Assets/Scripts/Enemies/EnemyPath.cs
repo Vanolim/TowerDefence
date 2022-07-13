@@ -24,7 +24,7 @@ public class EnemyPath
     {
         if (_currentWaypoint.WaypointType == WaypointType.End)
         {
-            EndWaypoint endWaypoint = _currentWaypoint.GetComponent<EndWaypoint>();
+            EndWaypoint endWaypoint = _currentWaypoint.GetEndWaypoint;
             PlayEffectEndWaypoint(endWaypoint);
             return true;
         }
@@ -33,8 +33,7 @@ public class EnemyPath
 
     private void PlayEffectEndWaypoint(EndWaypoint endWaypoint)
     {
-        endWaypoint.PlayParticle();
-        endWaypoint.PlaySound();
+        endWaypoint.PlayEndEffect();
     }
 
     public Vector3 GetNextWaypoint()

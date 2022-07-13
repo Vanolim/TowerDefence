@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5690613379129348446}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShootingPositions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105263034399686369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.068}
+  m_LocalPosition: {x: 0, y: -0.026, z: 0.068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4118232854561160975}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6112057650860328827}
   - component: {fileID: 2318741275687948056}
   - component: {fileID: 5067326062259208046}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be2f54dcb92c574a8ff646318ef109a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _launchPoint: {fileID: 5690613379129348446}
+  LaunchPoint: {fileID: 5690613379129348446}
   shellTypeId: 0
 --- !u!1 &4730132025635480276
 GameObject:
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 647461986873656839}
   - component: {fileID: 7959563789701853059}
   - component: {fileID: 7158161110613321984}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ballista
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootSound: {fileID: 7158161110613321984}
+  _towerGun: {fileID: 5067326062259208046}
 --- !u!135 &7959563789701853059
 SphereCollider:
   m_ObjectHideFlags: 0
