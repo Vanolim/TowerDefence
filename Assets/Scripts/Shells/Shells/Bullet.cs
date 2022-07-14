@@ -11,7 +11,7 @@ public class Bullet : Shell
     {
         if (IsEnemyPosition())
         {
-            ToDamage(TargetPoint.Enemy);
+            ToDamageEnemy(TargetPoint.Enemy);
             Recycle();
             Destroyed();
             return;

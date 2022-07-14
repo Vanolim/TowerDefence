@@ -25,14 +25,10 @@ public class Mortar : Tower
         }
         else
         {
-            if (TryFindNewTarget() == false)
-            {
-                RotateBodyAroundRandomly();
-            }
-            else
-            {
+            if (TryFindNewTarget())
                 StopBodyRotateRandomly();
-            }
+            else
+                RotateBodyAroundRandomly();
         };
     }
 

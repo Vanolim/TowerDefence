@@ -32,7 +32,7 @@ public class Arrow : Shell
     {
         if (collision.gameObject.TryGetComponent(out TargetPoint target))
         {
-            ToDamage(target.Enemy);
+            ToDamageEnemy(target.Enemy);
         }
     }
 }

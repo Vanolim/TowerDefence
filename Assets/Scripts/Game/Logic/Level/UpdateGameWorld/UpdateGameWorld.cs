@@ -10,12 +10,12 @@ public class UpdateGameWorld : MonoBehaviour, IPauseble
 
     private void Update()
     {
-        if (_isPaused == false)
+        if (_isPaused != false) 
+            return;
+        
+        foreach (var item in _tickables)
         {
-            foreach (var item in _tickables)
-            {
-                item.Tick(Time.deltaTime);
-            }
+            item.Tick(Time.deltaTime);
         }
     }
 

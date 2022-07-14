@@ -51,7 +51,7 @@ public class Mine : Shell
         {
             foreach (var enemy in hurtEnemies)
             {
-                ToDamage(enemy);
+                ToDamageEnemy(enemy);
             }
         }
     }

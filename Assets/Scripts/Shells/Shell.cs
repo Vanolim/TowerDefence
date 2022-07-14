@@ -51,7 +51,7 @@ public abstract class Shell : MonoBehaviour
         transform.LookAt(TargetPoint.Position);
     }
 
-    protected void ToDamage(Enemy enemy)
+    protected void ToDamageEnemy(Enemy enemy)
     {
         enemy.TakeDamage(_staticData.Damage);
     }
