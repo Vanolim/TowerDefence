@@ -19,8 +19,8 @@
 ![3](https://user-images.githubusercontent.com/60060770/179187823-b5269e1e-17be-4251-9014-eac6979b22ae.png)
 
 # Прохождение уровней:
-Прохождение первого уровня - https://youtu.be/B8zXc2LvDtY
-Прохождение второго уровня - https://youtu.be/zxyIsLu7zPM
+1) Прохождение первого уровня - https://youtu.be/B8zXc2LvDtY
+2) Прохождение второго уровня - https://youtu.be/zxyIsLu7zPM
 
 # Плагины, использованные в проекте:
 1) DOTween
