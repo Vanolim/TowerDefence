@@ -13,9 +13,9 @@
 6) При иницализации проекта проиходит подгрузка сервисов проекта, которые находятся в DontDestroyOnLoad объекте. Этот объект будет переходить в каждую активную сцену и все сервисы в нем будут работать непрерывно на протяжении всей игры
 
 # Демострация проекта:
-![1](https://user-images.githubusercontent.com/60060770/179187798-05c3a75c-a37c-4fe9-a0e6-635dbcf6dec3.png)
-![2](https://user-images.githubusercontent.com/60060770/179187813-2a153ab4-ad65-479a-b31a-7cf10cdcee03.png)
-![3](https://user-images.githubusercontent.com/60060770/179187823-b5269e1e-17be-4251-9014-eac6979b22ae.png)
+<img src="https://user-images.githubusercontent.com/60060770/179187798-05c3a75c-a37c-4fe9-a0e6-635dbcf6dec3.png" width="600" height="400">
+<img src="https://user-images.githubusercontent.com/60060770/179187813-2a153ab4-ad65-479a-b31a-7cf10cdcee03.png" width="600" height="400">
+<img src="https://user-images.githubusercontent.com/60060770/179187823-b5269e1e-17be-4251-9014-eac6979b22ae.png" width="600" height="400">
 
 # Прохождение уровней:
 1) Прохождение первого уровня - https://youtu.be/B8zXc2LvDtY
