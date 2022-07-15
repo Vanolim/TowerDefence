@@ -23,3 +23,7 @@
 # Плагины, использованные в проекте:
 1) DOTween
 2) TextMeshPro
+
+# Ссылки для скачивания:
+1) На PC: https://disk.yandex.ru/d/MGMizBd87cAeyg
+2) На android: https://disk.yandex.ru/d/qywo8kN1Z4BRXQ
